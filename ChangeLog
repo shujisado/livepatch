@@ -1,0 +1,20 @@
+2004-11-09  Fumitoshi UKAI  <ukai@debian.or.jp>
+
+	* livepatch.c (bfd_map_section_alloc_size): 
+	   add to support bss correctly
+	
+2004-11-06  Fumitoshi UKAI  <ukai@debian.or.jp>
+
+	* livepatch.c: check linux && i386
+	* livepatch.c: ELF_MACHINE_PLT_REL
+	  define, so PLTREL is ElfW(Rel) correctly.
+	* livepatch.c (bfd_read_symbols): 
+	  fix goto label
+
+2004-11-04  Fumitoshi UKAI  <ukai@debian.or.jp>	
+
+	* release announcement on freshmeat.net
+
+2004-11-03  Fumitoshi UKAI  <ukai@debian.or.jp>	
+
+	* initial version
