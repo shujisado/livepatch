@@ -1,0 +1,45 @@
+ELF relocation memo
+
+.dynsym => ElfW(Sym) dynsym
+.dynstr => char *strtab
+
+.rel.plt => PLTREL *reloc = jmprel[i] 
+ElfW(Sym) *sym = &symtab[ELFW(R_SYM)(reloc->r_info)]
+void *reladdr = reloc->r_offset;	/* .got */
+char *symname = &strtab[sym->stname]
+
+
+.rel.dyn => data relocation
+
+elf/dl-runtime.c
+PLTREL -> ElfW(Rel), ElfW(RelA)
+
+glibc/elf/elf.h
+
+ELF32_R_SYM(val)	val>>8
+ELF32_R_TYPE(val)	val&0xff
+
+ElfW(Sym)
+typedef struct
+{
+  Elf32_Word    st_name;                /* Symbol name (string tbl index) */
+  Elf32_Addr    st_value;               /* Symbol value */
+  Elf32_Word    st_size;                /* Symbol size */
+  unsigned char st_info;                /* Symbol type and binding */
+  unsigned char st_other;               /* Symbol visibility */
+  Elf32_Section st_shndx;               /* Section index */
+} Elf32_Sym; // 16 = 4 + 4 + 4 + 1 + 1 + 2
+
+ElfW(Rel)
+typedef struct
+{
+  Elf32_Addr    r_offset;               /* Address */
+  Elf32_Word    r_info;                 /* Relocation type and symbol index */
+} Elf32_Rel;
+   
+typedef struct
+{
+  Elf32_Addr    r_offset;               /* Address */
+  Elf32_Word    r_info;                 /* Relocation type and symbol index */
+  Elf32_Sword   r_addend;               /* Addend */
+} Elf32_Rel
